@@ -14,7 +14,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Theosのセットアップ
+    - name: Install Dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential fakeroot libtinfo6 libz3-dev rsync curl perl unzip git libplist-utils
+
+    - name: Set up Theos
       uses: Randomblock1/theos-action@v1
       with:
         theos-dir: 'theos'
@@ -23,5 +28,5 @@ jobs:
         theos-sdks-branch: 'master'
         orion: 'false'
 
-    - name: プロジェクトのビルド
+    - name: Build Project
       run: make
